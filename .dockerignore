@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+!.env.example
+bot_log.txt
+.git/
+.github/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.md
+justfile
+.gitignore
