@@ -20,6 +20,10 @@ logging.basicConfig(
     level=logging.INFO,
     handlers=[logging.FileHandler("bot_log.txt"), logging.StreamHandler()],
 )
+
+# Prevent httpx from logging URLs containing bot token
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
 logger = logging.getLogger(__name__)
 stats = {"scams": 0, "nsfw": 0, "start_time": datetime.datetime.now()}
 
@@ -28,7 +32,8 @@ BANNED_WORDS = [
     "hentai",
     "airdrop",
     "porn",
-    "sexfree money",
+    "sex",
+    "free money",
 ]
 
 
@@ -47,18 +52,18 @@ async def moderator(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.lower() if update.message.text else ""
 
     if any(word in text for word in BANNED_WORDS):
+        stats["scams"] += 1
         try:
             await update.message.delete()
-            await update.message.reply_text(
-                f"Deleted message {update.message} from {
-                    update.message.from_user.username
-                }"
-            )
+            username = update.message.from_user.username or "unknown"
+            logger.warning(f"Deleted message from {username}: matched banned words")
         except Exception as e:
-            await update.message.reply_text(f"Failed to delete: {e}")
+            logger.error(f"Failed to delete message: {e}")
 
 
 def main():
+    if not BOT_TOKEN:
+        raise ValueError("TELEGRAM_BOT_API not set in environment")
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), moderator))
     app.add_handler(CommandHandler("hello", start_command))
