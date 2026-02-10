@@ -1,0 +1,8 @@
+# Ignore bot log
+bot_log.txt
+
+# Python cache files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
