@@ -1,0 +1,20 @@
+{
+  "banned_words": [
+    "crypto",
+    "bitcoin",
+    "airdrop",
+    "free money",
+    "earn money",
+    "investment opportunity"
+  ],
+  "nsfw_words": [
+    "porn",
+    "hentai",
+    "sex",
+    "nude",
+    "onlyfans"
+  ],
+  "admin_users": [],
+  "ban_threshold": 3,
+  "auto_ban": true
+}
