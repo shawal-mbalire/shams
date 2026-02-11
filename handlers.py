@@ -13,13 +13,17 @@ from moderator import stats, user_violations
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /start and /hello commands."""
-    uptime = datetime.datetime.now() - stats["start_time"]
     await update.message.reply_text(
-        f"✅ **Bot is Online!**\n"
-        f"⏱ Uptime: {str(uptime).split('.')[0]}\n"
-        f"🛡 Scams blocked: {stats['scams']}\n"
-        f"🔞 NSFW blocked: {stats['nsfw']}\n"
-        f"👥 Users warned: {len(user_violations)}"
+        "🤖 **Shams Moderation Bot**\n\n"
+        "I automatically detect and remove:\n"
+        "• Scam messages (crypto, airdrops, fake investments)\n"
+        "• NSFW content\n\n"
+        "Commands:\n"
+        "/start - This message\n"
+        "/whoami - Get your user ID\n"
+        "/stats - Statistics (admin only)\n"
+        "/ban <word> - Ban a word (admin only)\n"
+        "/unban <word> - Unban a word (admin only)"
     )
 
 

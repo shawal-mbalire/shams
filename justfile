@@ -4,7 +4,7 @@ default:
     @just --list
 
 serve:
-    @uv run main.py
+    @uv run watchfiles "python main.py" --filter python
 
 # Build docker image
 docker-build:
