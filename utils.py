@@ -12,11 +12,14 @@ def extract_text(message) -> str:
     if message.caption:
         text_parts.append(message.caption)
     
-    if message.forward_from:
-        if message.forward_from.first_name:
-            text_parts.append(message.forward_from.first_name)
-        if message.forward_from.username:
-            text_parts.append(message.forward_from.username)
+    # Check for forwarded messages (newer API uses forward_origin)
+    if hasattr(message, 'forward_origin') and message.forward_origin:
+        if hasattr(message.forward_origin, 'sender_user') and message.forward_origin.sender_user:
+            user = message.forward_origin.sender_user
+            if user.first_name:
+                text_parts.append(user.first_name)
+            if user.username:
+                text_parts.append(user.username)
     
     return " ".join(text_parts).lower()
 

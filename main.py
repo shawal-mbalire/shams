@@ -4,7 +4,7 @@ import logging
 from dotenv import load_dotenv
 from telegram.ext import Application, MessageHandler, filters, CommandHandler
 
-from handlers import start_command, stats_command, ban_word_command, unban_word_command
+from handlers import start_command, stats_command, ban_word_command, unban_word_command, whoami_command
 from moderator import moderator
 
 load_dotenv()
@@ -39,6 +39,7 @@ def main():
     app.add_handler(CommandHandler("stats", stats_command))
     app.add_handler(CommandHandler("ban", ban_word_command))
     app.add_handler(CommandHandler("unban", unban_word_command))
+    app.add_handler(CommandHandler("whoami", whoami_command))
     
     logger.info("Shams started. Listening for messages")
     app.run_polling()

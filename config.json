@@ -14,7 +14,9 @@
     "nude",
     "onlyfans"
   ],
-  "admin_users": [],
+  "admin_users": [
+    7818997512
+  ],
   "ban_threshold": 3,
   "auto_ban": true
 }

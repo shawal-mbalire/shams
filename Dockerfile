@@ -10,8 +10,8 @@ COPY pyproject.toml ./
 COPY main.py config.py handlers.py moderator.py utils.py ./
 COPY config.json ./
 
-# Install dependencies
-RUN uv pip install --system -r pyproject.toml
+# Install dependencies using uv
+RUN uv pip install --system --no-cache python-dotenv python-telegram-bot
 
 # Run the bot
 CMD ["python", "main.py"]

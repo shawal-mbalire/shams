@@ -95,3 +95,14 @@ async def unban_word_command(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text(f"✅ Unbanned word: {word}")
     else:
         await update.message.reply_text(f"⚠️ Word not found: {word}")
+
+
+async def whoami_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Show your Telegram user ID."""
+    user_id = update.effective_user.id if update.effective_user else 0
+    username = update.effective_user.username if update.effective_user else "unknown"
+    await update.message.reply_text(
+        f"👤 Your Info:\n"
+        f"ID: {user_id}\n"
+        f"Username: @{username if username else 'none'}"
+    )
